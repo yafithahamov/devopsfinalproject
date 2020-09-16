@@ -1,15 +1,33 @@
-<%@ page import="java.util.Date" %>
-<!DOCTYPE html>
 <html>
-	<head>
-		<title>My Web App</title>
-	</head>
-	<body>
-		<h1>My Web App</h1> 
-
-		<h2>here is the change<h2>
-		<h2> from my original computer </h2>
-         <h2> from my original computer </h2>
-		<p>The current time is: <%= new Date().toString() %></p>
-	</body>
+<head>
+  <title>Echoing HTML Request Parameters</title>
+</head>
+<body>
+  <h3>Choose an author:</h3>
+  <form method="get">
+    <input type="checkbox" name="author" value="Tan Ah Teck">Tan
+    <input type="checkbox" name="author" value="Mohd Ali">Ali
+    <input type="checkbox" name="author" value="Kumar">Kumar
+    <input type="submit" value="Query">
+  </form>
+ 
+  <%
+  String[] authors = request.getParameterValues("author");
+  if (authors != null) {
+  %>
+    <h3>You have selected author(s):</h3>
+    <ul>
+  <%
+      for (int i = 0; i < authors.length; ++i) {
+  %>
+        <li><%= authors[i] %></li>
+  <%
+      }
+  %>
+    </ul>
+    <a href="<%= request.getRequestURI() %>">BACK</a>
+  <%
+  }
+  %>
+</body>
 </html>
